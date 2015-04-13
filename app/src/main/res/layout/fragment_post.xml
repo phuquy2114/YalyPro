@@ -39,7 +39,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/txt_nguoi"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:inputType="textCapSentences|textAutoCorrect"/>
 
         </RelativeLayout>
 
@@ -66,6 +67,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/txt_sodo"
+                android:inputType="textCapSentences|textAutoCorrect"
                 android:background="@android:color/transparent" />
 
         </RelativeLayout>
