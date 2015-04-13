@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="aqua">#00FFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="chartreu">#7FFF00</color>
+    <color name="red">#DC143C</color>
+    
+    //header bar
+    <color name="dodgerblue">#1E90FF</color>
+</resources>

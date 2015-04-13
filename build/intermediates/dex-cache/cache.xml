@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/phuquy/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.3.2/d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27/picasso-2.3.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27">
+        <dex dex="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/pre-dexed/debug/picasso-2.3.2-aaf6738eafd0da60d40dd2aa191dd878c10b3921.jar" />
+    </item>
+    <item
+        jar="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/pre-dexed/debug/classes-ac13ed2af5ee4c3f0372252c02cf9cf44e47bd55.jar" />
+    </item>
+    <item
+        jar="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-4616885c6771c67494486cf8d9f6a5e8df1a3061.jar" />
+    </item>
+    <item
+        jar="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/pre-dexed/debug/classes-1d53879731fab64a4bb9d424d9765ed95a579c48.jar" />
+    </item>
+    <item
+        jar="/Users/phuquy/Documents/Eclipese/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/phuquy/Documents/ProjectStudio/Yaly/Yaly/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-fbbaeaca4a4895b5abae289a5dbc0b3bd30cc3e3.jar" />
+    </item>
+
+</items>

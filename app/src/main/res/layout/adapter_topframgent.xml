@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_thumnai"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/nguoido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/nguoido"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/nguoido"
+            android:text="@string/ten_nguoi_do" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/soto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/soto"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_number_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/soto"
+            android:text="@string/number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/muigiay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="@string/muigiay"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/muigiay"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_img_vuong"
+                android:layout_width="20dp"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/app_name"
+                android:background="@android:color/transparent"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_on_check"/>
+
+            <TextView
+                android:id="@+id/txt_vuong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:text="Vuong"
+                />
+
+            <ImageView
+                android:id="@+id/btn_img_tron"
+                android:layout_width="20dp"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/app_name"
+                android:background="@android:color/transparent"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_off_check"/>
+
+            <TextView
+                android:id="@+id/txt_tron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:text="Tron"
+                />
+
+
+            <ImageView
+                android:id="@+id/btn_img_nhon"
+                android:layout_width="20dp"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/app_name"
+                android:background="@android:color/transparent"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_off_check"/>
+
+            <TextView
+                android:id="@+id/txt_nhon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:text="Nhon"
+                />
+
+
+            <ImageView
+                android:id="@+id/btn_img_tu"
+                android:layout_width="20dp"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/app_name"
+                android:background="@android:color/transparent"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_off_check"/>
+
+            <TextView
+                android:id="@+id/txt_tu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:text="Tu"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

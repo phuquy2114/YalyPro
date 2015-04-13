@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">YalyPro</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="tab_one">Top Fragment</string>
+    <string name="tab_two">Post Fragment</string>
+    <string name="tab_three">Author Fragment</string>
+
+
+    //Top fragment
+    <string name="nguoido">Người Đo :</string>
+    <string name="ten_nguoi_do">Đỗ Phú Quý</string>
+    <string name="muigiay">Mũi Giầy :</string>
+    <string name="soto">Số tờ : </string>
+    <string name="number">20</string>
+
+    //Header bar
+    <string name="left">X</string>
+    <string name="right">X</string>
+</resources>
