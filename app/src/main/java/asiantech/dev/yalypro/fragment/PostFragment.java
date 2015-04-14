@@ -1,5 +1,6 @@
 package asiantech.dev.yalypro.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -43,12 +44,10 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int GALLERY_REQUEST = 1999;
-    private static final int RESULT_OK = -1;
 
     private ArrayList<ImageOnPhone> mImageOnPhonesSelected = new ArrayList<>();
     private Bitmap photoUser;
     private String mAvatarPath = "";
-    private int mHeightAvatar;
 
 
     @Override
@@ -67,12 +66,12 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 photoUser = (Bitmap) data.getExtras().get("data");
                 mImgThumnai.setImageBitmap(photoUser);
-
-                Uri uri = data.getData();
+                Uri uri = null;
+                uri = data.getData();
                 if (uri != null) {
                     mAvatarPath = getImageOnPhoneFromUri(getActivity(), uri).getPath();
                     Log.d("qqq", mAvatarPath);
@@ -80,14 +79,14 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                     Log.d("qqq", "uri is null");
                 }
             }
-        } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
+        } else if (requestCode == GALLERY_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data.hasExtra(CameraRollActivity.KEY_PARCEL_PHOTOS_SELECTED)) {
                 mImageOnPhonesSelected = data.getParcelableArrayListExtra(CameraRollActivity.KEY_PARCEL_PHOTOS_SELECTED);
                 if (mImageOnPhonesSelected.size() > 0) {
                     mAvatarPath = mImageOnPhonesSelected.get(0).getPath();
                     Picasso.with(getActivity())
                             .load("file://" + mAvatarPath)
-                            .resize(mImgThumnai.getMaxWidth(), 300)
+                            .resize(300, 300)
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnai);
@@ -106,10 +105,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     public void setValue() {
-//
-//        mHeightAvatar = Common.getWidthScreen(getActivity()) * 200 / 640;
-//        mImgThumnai.getLayoutParams().height = mHeightAvatar;
-//        mImgThumnai.getLayoutParams().width = mHeightAvatar;
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -162,8 +157,8 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_avatar:
-                DialogCameraRoll dialogCameraRoll = new DialogCameraRoll(getActivity(),this);
-                dialogCameraRoll.show(getFragmentManager(),"");
+                DialogCameraRoll dialogCameraRoll = new DialogCameraRoll(getActivity(), this);
+                dialogCameraRoll.show(getFragmentManager(), "");
                 break;
             case R.id.btn_post:
                 Toast.makeText(getActivity(), "Post Success ", Toast.LENGTH_SHORT).show();
@@ -182,7 +177,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void setTakePhoto() {
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 
