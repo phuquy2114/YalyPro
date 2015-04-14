@@ -91,4 +91,5 @@ public class MainActivity extends BaseActivity implements TabHost.onItemTabhost 
     public void setonClickItemClick(int position) {
         mViewPage.setCurrentItem(position);
     }
+
 }
