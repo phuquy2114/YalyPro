@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/img_avatar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:contentDescription="@string/app_name"
         android:padding="30dp"
         android:scaleType="fitXY"
@@ -40,7 +40,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/txt_nguoi"
                 android:background="@android:color/transparent"
-                android:inputType="textCapSentences|textAutoCorrect"/>
+                android:inputType="textCapSentences|textAutoCorrect" />
 
         </RelativeLayout>
 
@@ -67,8 +67,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/txt_sodo"
-                android:inputType="textCapSentences|textAutoCorrect"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:inputType="textCapSentences|textAutoCorrect" />
 
         </RelativeLayout>
 
@@ -89,85 +89,40 @@
                 android:layout_centerVertical="true"
                 android:text="@string/muigiay" />
 
-            <LinearLayout
+
+            <RadioGroup
+                android:id="@+id/group_radio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/txt_muigiay"
+                android:checkedButton="@+id/radio_square"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/btn_img_vuong"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_on_check" />
-
-                <TextView
-                    android:id="@+id/txt_vuong"
+                <RadioButton
+                    android:id="@+id/radio_square"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center"
-                    android:text="Vuong" />
+                    android:text="@string/square" />
 
-                <ImageView
-                    android:id="@+id/btn_img_tron"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_off_check" />
-
-                <TextView
-                    android:id="@+id/txt_tron"
+                <RadioButton
+                    android:id="@+id/radio_round"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center"
-                    android:text="Tron" />
+                    android:text="@string/round" />
 
-
-                <ImageView
-                    android:id="@+id/btn_img_nhon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_off_check" />
-
-                <TextView
-                    android:id="@+id/txt_nhon"
+                <RadioButton
+                    android:id="@+id/radio_pointed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center"
-                    android:text="Nhon" />
+                    android:text="@string/pointed" />
 
-
-                <ImageView
-                    android:id="@+id/btn_img_tu"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_off_check" />
-
-                <TextView
-                    android:id="@+id/txt_tu"
+                <RadioButton
+                    android:id="@+id/radio_tu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center"
-                    android:text="Tu" />
-            </LinearLayout>
-
-
+                    android:text="@string/tu" />
+            </RadioGroup>
         </RelativeLayout>
 
         <TextView
@@ -175,10 +130,10 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/backgound_image_post"
-            android:text="Post"
             android:layout_marginTop="20dp"
+            android:background="@drawable/backgound_image_post"
             android:gravity="center"
+            android:text="Post"
             android:textSize="20sp" />
 
 
