@@ -22,7 +22,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import asiantech.dev.yalypro.Common.Common;
 import asiantech.dev.yalypro.Helper.BaseFragment;
 import asiantech.dev.yalypro.R;
 import asiantech.dev.yalypro.cameraRoll.CameraRollActivity;
@@ -88,7 +87,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                     mAvatarPath = mImageOnPhonesSelected.get(0).getPath();
                     Picasso.with(getActivity())
                             .load("file://" + mAvatarPath)
-                            .resize(250, 250)
+                            .resize(mImgThumnai.getMaxWidth(), 300)
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnai);
@@ -107,10 +106,10 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     public void setValue() {
-
-        mHeightAvatar = Common.getWidthScreen(getActivity()) * 200 / 640;
-        mImgThumnai.getLayoutParams().height = mHeightAvatar;
-        mImgThumnai.getLayoutParams().width = mHeightAvatar;
+//
+//        mHeightAvatar = Common.getWidthScreen(getActivity()) * 200 / 640;
+//        mImgThumnai.getLayoutParams().height = mHeightAvatar;
+//        mImgThumnai.getLayoutParams().width = mHeightAvatar;
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -178,6 +177,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     public void setTake() {
         Intent cameraRoll = new Intent(getActivity(), CameraRollActivity.class);
         startActivityForResult(cameraRoll, GALLERY_REQUEST);
+
     }
 
     @Override

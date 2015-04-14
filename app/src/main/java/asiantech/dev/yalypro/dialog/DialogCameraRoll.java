@@ -119,12 +119,16 @@ public class DialogCameraRoll extends DialogFragment implements View.OnClickList
             case R.id.txt_take_loading:
                 if (mListener!=null){
                     mListener.setTake();
+                    dismiss();
                 }
+
                 break;
             case R.id.txt_take_photo:
                 if (mListener!=null){
                     mListener.setTakePhoto();
+                    dismiss();
                 }
+
                 break;
             default:
                 break;
