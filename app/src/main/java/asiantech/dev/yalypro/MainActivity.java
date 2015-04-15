@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements TabHost.onItemTabhost 
     @Override
     protected void setEvent() {
         //View page
-        mViewPage.setEnabled(true);
+//        mViewPage.setEnabled(true);
         mViewPage.setAdapter(mAdapter);
         mViewPage.setOffscreenPageLimit(3);
         mViewPage.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

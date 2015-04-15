@@ -35,7 +35,7 @@ import asiantech.dev.yalypro.dialog.DialogCameraRoll;
  */
 public class PostFragment extends BaseFragment implements View.OnClickListener, DialogCameraRoll.BaseDialogListener {
 
-    private ImageView mImgThumnai;
+    private ImageView mImgThumnail;
     private EditText mEdtName;
     private EditText mNumber;
     private RadioGroup mRadioGroup;
@@ -52,8 +52,22 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_post, null, false);
+        mView = inflater.inflate(R.layout.fragment_post, container, false);
         return mView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mImgThumnail = (ImageView) view.findViewById(R.id.img_avatar);
+        mImgThumnail.setBackgroundColor(0xff000000);
+//        file:///storage/sdcard0/DCIM/Camera/20150415_085833.jpg
+//        Picasso.with(getActivity())
+//                .load("file:///storage/sdcard0/DCIM/Camera/20150415_085833.jpg")
+//                .resize(300, 300)
+//                .error(R.mipmap.ic_launcher)
+//                .centerCrop()
+//                .into(mImgThumnail);
     }
 
     @Override
@@ -66,15 +80,22 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 photoUser = (Bitmap) data.getExtras().get("data");
-                mImgThumnai.setImageBitmap(photoUser);
-                Uri uri = null;
-                uri = data.getData();
+                mImgThumnail.setImageBitmap(photoUser);
+                Uri uri = data.getData();
                 if (uri != null) {
+
                     mAvatarPath = getImageOnPhoneFromUri(getActivity(), uri).getPath();
-                    Log.d("qqq", mAvatarPath);
+                    Log.d("aaa>>>", "file://"+mAvatarPath);
+                    Picasso.with(getActivity())
+                            .load("file://" + mAvatarPath)
+                            .resize(300, 300)
+                            .error(R.mipmap.ic_launcher)
+                            .centerCrop()
+                            .into(mImgThumnail);
                 } else {
                     Log.d("qqq", "uri is null");
                 }
@@ -89,7 +110,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                             .resize(300, 300)
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
-                            .into(mImgThumnai);
+                            .into(mImgThumnail);
                 }
 
             }
@@ -97,7 +118,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     public void initialize() {
-        mImgThumnai = (ImageView) mView.findViewById(R.id.img_avatar);
+
         mEdtName = (EditText) mView.findViewById(R.id.edit_name);
         mNumber = (EditText) mView.findViewById(R.id.edit_number);
         mRadioGroup = (RadioGroup) mView.findViewById(R.id.group_radio);
@@ -123,7 +144,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     public void setEvents() {
-        mImgThumnai.setOnClickListener(this);
+        mImgThumnail.setOnClickListener(this);
         mBtnPost.setOnClickListener(this);
     }
 

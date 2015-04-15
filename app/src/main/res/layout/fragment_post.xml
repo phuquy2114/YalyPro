@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAEBD7"
-    android:orientation="vertical">
+    >
 
 
     <ImageView
@@ -12,11 +11,13 @@
         android:layout_height="300dp"
         android:contentDescription="@string/app_name"
         android:padding="30dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher" />
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:background="#cccccc" />
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_avatar"
         android:orientation="vertical">
