@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,6 @@ public class TopFragment extends BaseFragment {
         initialize();
         setValue();
         setEvent();
-        new GetInfor().execute();
     }
 
     public void initialize() {
@@ -66,6 +64,7 @@ public class TopFragment extends BaseFragment {
 
     public void setValue() {
         mData = new ArrayList<>();
+        new GetInfor().execute();
         mAdapter = new AdapterTopFragment(getActivity(), mData);
 
     }
@@ -80,6 +79,7 @@ public class TopFragment extends BaseFragment {
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        new GetInfor().execute();
                         // Toast.makeText(getActivity(), "Loading", Toast.LENGTH_SHORT).show();
                         mAdapter = new AdapterTopFragment(getActivity(), mData);
                         mListView.setAdapter(mAdapter);
@@ -138,12 +138,12 @@ public class TopFragment extends BaseFragment {
         @Override
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
-            DataTDTO tdto ;
+            DataTDTO tdto;
             try {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                     tdto = new DataTDTO(jsonObject);
-                     mData.add(tdto);
+                    tdto = new DataTDTO(jsonObject);
+                    mData.add(tdto);
                 }
 
             } catch (JSONException e) {
