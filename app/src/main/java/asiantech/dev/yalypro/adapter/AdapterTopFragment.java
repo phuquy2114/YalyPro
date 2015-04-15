@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ public class AdapterTopFragment extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 20;
+        return mData.size();
     }
 
     @Override
@@ -45,15 +48,70 @@ public class AdapterTopFragment extends BaseAdapter {
     }
 
     public class ViewHolder {
-       private ImageView imageView;
+        private ImageView imageView;
+        private TextView mTxtName;
+        private TextView mTxtNumber;
+        private ImageView mImgPointed;
+        private ImageView mImgRound;
+        private ImageView mImgSquare;
+        private ImageView mImgTu;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.adapter_topframgent,parent,false);
+            viewHolder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.adapter_topframgent, parent, false);
+            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.img_thumnai);
+            viewHolder.mTxtName = (TextView) convertView.findViewById(R.id.txt_name);
+            viewHolder.mTxtNumber = (TextView) convertView.findViewById(R.id.txt_number_page);
+
+            //image
+            viewHolder.mImgSquare = (ImageView) convertView.findViewById(R.id.btn_img_vuong);
+            viewHolder.mImgPointed = (ImageView) convertView.findViewById(R.id.btn_img_nhon);
+            viewHolder.mImgRound = (ImageView) convertView.findViewById(R.id.btn_img_tron);
+            viewHolder.mImgTu = (ImageView) convertView.findViewById(R.id.btn_img_tu);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        Picasso.with(mContext).load("http://ndlapi.somee.com/Content/Upload/" + getItem(position).getImage())
+                .resize(300, 300)
+                .error(R.mipmap.ic_launcher)
+                .centerCrop()
+                .into(viewHolder.imageView);
+
+        viewHolder.mTxtName.setText("" + getItem(position).getName());
+        viewHolder.mTxtNumber.setText("" + getItem(position).getNumber());
+
+        if (getItem(position).getType().equals("square")) {
+            setDefaultImageCheckbox(viewHolder, position);
+            viewHolder.mImgSquare.setImageResource(R.drawable.ic_on_check);
+        } else if (getItem(position).getType().equals("round")) {
+            setDefaultImageCheckbox(viewHolder, position);
+            viewHolder.mImgPointed.setImageResource(R.drawable.ic_on_check);
+        } else if (getItem(position).getType().equals("pointed")) {
+            setDefaultImageCheckbox(viewHolder, position);
+            viewHolder.mImgPointed.setImageResource(R.drawable.ic_on_check);
+        } else if (getItem(position).getType().equals("tu")) {
+            setDefaultImageCheckbox(viewHolder, position);
+            viewHolder.mImgTu.setImageResource(R.drawable.ic_on_check);
+        } else {
+            setDefaultImageCheckbox(viewHolder, position);
+        }
+
+
         return convertView;
+    }
+
+    public void setDefaultImageCheckbox(ViewHolder viewHolder, int position) {
+        viewHolder.mImgSquare.setImageResource(R.drawable.ic_off_check);
+        viewHolder.mImgRound.setImageResource(R.drawable.ic_off_check);
+        viewHolder.mImgPointed.setImageResource(R.drawable.ic_off_check);
+        viewHolder.mImgTu.setImageResource(R.drawable.ic_off_check);
     }
 
 }

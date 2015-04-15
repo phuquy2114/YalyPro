@@ -54,7 +54,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     private ArrayList<ImageOnPhone> mImageOnPhonesSelected = new ArrayList<>();
     private Bitmap photoUser;
     private String mAvatarPath = "";
-    private String mAvatarbase = "";
     private String type = "";
 
 
