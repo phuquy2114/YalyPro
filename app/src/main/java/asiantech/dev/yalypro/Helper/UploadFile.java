@@ -44,12 +44,7 @@ public class UploadFile extends AsyncTask<Void, Void, JSONObject> {
         parameters.put("description", description);
         parameters.put("gender", gender);
         parameters.put("pub_gender", pub_gender);
-        parameters.put("birthday", birthday);
-        parameters.put("blood_type", blood_type);
-        parameters.put("job", job);
-        parameters.put("location", location);
-        parameters.put("website", website);
-        parameters.put("character_type", characterType);
+
     }
 
     @Override
