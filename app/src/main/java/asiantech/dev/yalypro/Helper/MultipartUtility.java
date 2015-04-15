@@ -1,7 +1,6 @@
 package asiantech.dev.yalypro.Helper;
 
 import android.content.Context;
-import android.util.Base64;
 
 import org.json.JSONObject;
 
@@ -17,9 +16,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-import dev.asiantech.koebu.common.UrlAPI;
-import dev.asiantech.koebu.dto.LoginUser;
-import dev.asiantech.koebu.util.JsonUtil;
 
 
 public class MultipartUtility {
@@ -47,8 +43,8 @@ public class MultipartUtility {
         httpConn.setDoOutput(true); // indicates POST method
         httpConn.setDoInput(true);
         httpConn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-        httpConn.setRequestProperty("Authorization", "Basic " + Base64.encodeToString("koebudev:UxbKID693".getBytes(), Base64.NO_WRAP));
-        httpConn.setRequestProperty("Cookie", UrlAPI.SESSION_ID_KEY + "=" +new LoginUser(context).getDev_id());
+      //  httpConn.setRequestProperty("Authorization", "Basic " + Base64.encodeToString("koebudev:UxbKID693".getBytes(), Base64.NO_WRAP));
+      //  httpConn.setRequestProperty("Cookie", UrlAPI.SESSION_ID_KEY + "=" +new LoginUser(context).getDev_id());
         outputStream = httpConn.getOutputStream();
         writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),true);
     }

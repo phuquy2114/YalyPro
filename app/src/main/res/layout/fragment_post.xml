@@ -13,6 +13,7 @@
         android:background="#cccccc"
         android:contentDescription="@string/app_name"
         android:padding="30dp"
+        android:src="@mipmap/ic_launcher"
         android:scaleType="centerCrop" />
 
     <LinearLayout

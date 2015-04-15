@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -17,13 +18,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
 import asiantech.dev.yalypro.Helper.BaseFragment;
+import asiantech.dev.yalypro.Helper.ConnectingNetwork;
 import asiantech.dev.yalypro.R;
 import asiantech.dev.yalypro.cameraRoll.CameraRollActivity;
 import asiantech.dev.yalypro.cameraRoll.ImageOnPhone;
@@ -37,17 +42,20 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     private ImageView mImgThumnail;
     private EditText mEdtName;
-    private EditText mNumber;
+    private EditText mEditNumber;
     private RadioGroup mRadioGroup;
     private View mView;
     private TextView mBtnPost;
 
+    private EncodeBase64 mTaskEncode;
     private static final int CAMERA_REQUEST = 1888;
     private static final int GALLERY_REQUEST = 1999;
 
     private ArrayList<ImageOnPhone> mImageOnPhonesSelected = new ArrayList<>();
     private Bitmap photoUser;
     private String mAvatarPath = "";
+    private String mAvatarbase = "";
+    private String type = "";
 
 
     @Override
@@ -76,18 +84,20 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 photoUser = (Bitmap) data.getExtras().get("data");
+
                 mImgThumnail.setImageBitmap(photoUser);
                 Uri uri = data.getData();
                 if (uri != null) {
 
                     mAvatarPath = getImageOnPhoneFromUri(getActivity(), uri).getPath();
-                    Log.d("aaa>>>", "file://"+mAvatarPath);
+                    Log.d("aaa>>>", "file://" + mAvatarPath);
                     Picasso.with(getActivity())
                             .load("file://" + mAvatarPath)
                             .resize(300, 300)
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnail);
+                  //  executeEncode64("file://" + mAvatarPath);
                 } else {
                     Log.d("qqq", "uri is null");
                 }
@@ -103,6 +113,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnail);
+                 //   executeEncode64("file://" + mAvatarPath);
                 }
 
             }
@@ -112,7 +123,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     public void initialize() {
 
         mEdtName = (EditText) mView.findViewById(R.id.edit_name);
-        mNumber = (EditText) mView.findViewById(R.id.edit_number);
+        mEditNumber = (EditText) mView.findViewById(R.id.edit_number);
         mRadioGroup = (RadioGroup) mView.findViewById(R.id.group_radio);
         mBtnPost = (TextView) mView.findViewById(R.id.btn_post);
     }
@@ -123,13 +134,13 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radio_square) {
-                    Toast.makeText(getActivity(), "SQUARE", Toast.LENGTH_SHORT).show();
+                    type ="square";
                 } else if (checkedId == R.id.radio_round) {
-                    Toast.makeText(getActivity(), "ROUND", Toast.LENGTH_SHORT).show();
+                    type ="round";
                 } else if (checkedId == R.id.radio_pointed) {
-                    Toast.makeText(getActivity(), "POINTED", Toast.LENGTH_SHORT).show();
+                    type ="pointed";
                 } else if (checkedId == R.id.radio_tu) {
-                    Toast.makeText(getActivity(), "TU", Toast.LENGTH_SHORT).show();
+                    type ="tu";
                 }
             }
         });
@@ -174,7 +185,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                 dialogCameraRoll.show(getFragmentManager(), "");
                 break;
             case R.id.btn_post:
-                Toast.makeText(getActivity(), "Post Success ", Toast.LENGTH_SHORT).show();
+                    new PostInfo().execute("http://ndlapi.somee.com/api/Measure/AddMeasure");
                 break;
             default:
                 break;
@@ -229,6 +240,85 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
         }
 
         return imageOnPhone;
+
+    }
+
+    // encode base 64
+    private void executeEncode64(String urlPath) {
+        if (mTaskEncode != null && mTaskEncode.getStatus() == AsyncTask.Status.RUNNING) {
+            return;
+        }
+        mTaskEncode = new EncodeBase64();
+        mTaskEncode.execute(urlPath);
+    }
+
+    public class EncodeBase64 extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //  mProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String result = "";
+            result = encode(params[0]);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mAvatarbase = s;
+            //   mProgressBar.setVisibility(View.GONE);
+        }
+
+        public String encode(String path) {
+            return getStringBase64FromBitmap(path);
+        }
+
+
+    }
+
+
+    public class PostInfo extends AsyncTask<String , Void , JSONArray> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONArray doInBackground(String... params) {
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = ConnectingNetwork.getInstance().executePostReturnJSONArray(params[0], getparams());
+            } catch (Exception e){
+                e.printStackTrace();
+
+            }
+            return jsonArray;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray jsonArray) {
+            super.onPostExecute(jsonArray);
+            Log.d("qqq",""+jsonArray);
+        }
+
+        public ArrayList<NameValuePair> getparams (){
+            ArrayList<NameValuePair> params = new ArrayList<>();
+
+            String mAvatar = getStringBase64FromBitmap("file://" + mAvatarPath);
+            params.add(new BasicNameValuePair("id","0"));
+            params.add(new BasicNameValuePair("measurer",mEdtName.getText().toString().trim()));
+            params.add(new BasicNameValuePair("size",mEditNumber.getText().toString().toString()));
+            params.add(new BasicNameValuePair("shoe_type",type));
+            params.add(new BasicNameValuePair("img",mAvatar));
+
+            return params;
+        }
+
 
     }
 }

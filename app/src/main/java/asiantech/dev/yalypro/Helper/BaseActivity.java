@@ -4,12 +4,17 @@
  */
 package asiantech.dev.yalypro.Helper;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.util.Base64;
+import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * @category BaseActivity
@@ -65,5 +70,64 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected abstract void setValue();
 
 	protected abstract void setEvent();
+
+    /**
+     *
+     * @param bitmap
+     * @return
+     */
+    public static byte[] getByteFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+        return os.toByteArray();
+    }
+
+    /**
+     *
+     * @param bitmap
+     * @return
+     */
+    public String getStringBase64FromBitmap(Bitmap bitmap) {
+        String result = null;
+
+        if (bitmap != null) {
+            byte[] photoByte = getByteFromBitmap(bitmap);
+            result = Base64.encodeToString(photoByte, Base64.DEFAULT);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param path
+     * @return
+     */
+    public String getStringBase64FromBitmap(String path) {
+        String result = null;
+
+        try {
+            // get bitmap
+            Bitmap bm = Picasso.with(getApplicationContext())
+                    .load(path)
+                    .centerInside()
+                    .resize(250,250)
+                    .get();
+
+            // check bitmap
+            if (bm != null) {
+
+                // get string file
+                result = getStringBase64FromBitmap(bm);
+
+                // recycle
+                bm.recycle();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
 }

@@ -27,8 +27,7 @@ public class UploadFile extends AsyncTask<Void, Void, JSONObject> {
     private String Url = "";
 
     public UploadFile(Context context, String filePath, String fullName, String description,
-                      String gender, String pub_gender, String birthday, String pubBirthday, String blood_type,
-                      String job, String location, String website, String characterType, IPostAudioListener p) {
+                      String gender, String pub_gender, String birthday,  IPostAudioListener p) {
 
         this.fileName = filePath;
         mContext = context;
