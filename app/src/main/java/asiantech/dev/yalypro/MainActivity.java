@@ -43,6 +43,9 @@ public class MainActivity extends BaseActivity implements TabHost.onItemTabhost 
 //        mViewPage.setEnabled(true);
         mViewPage.setAdapter(mAdapter);
         mViewPage.setOffscreenPageLimit(3);
+//        mViewPage.setClipToPadding(false);
+//        mViewPage.setPadding(100,0, 100,0);
+//        mViewPage.setPageMargin(50);
         mViewPage.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {

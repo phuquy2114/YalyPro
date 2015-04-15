@@ -2,10 +2,15 @@ package asiantech.dev.yalypro.Common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
+import android.os.Environment;
 import android.view.Display;
 import android.view.WindowManager;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Created by PhuQuy on 4/13/15.
@@ -38,5 +43,31 @@ public class Common {
             Display d = windowManager.getDefaultDisplay();
             return d.getWidth();
         }
+    }
+
+    public static String saveBitmapToFile(Bitmap image) {
+        // Store to tmp file
+        String extr = Environment.getExternalStorageDirectory().toString();
+        File mFolder = new File(extr + "/koebu");
+        if (!mFolder.exists()) {
+            mFolder.mkdir();
+        }
+
+        String s = "tmp.jpg";
+
+        File f = new File(mFolder.getAbsolutePath(), s);
+
+        String strMyImagePath = f.getAbsolutePath();
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(f);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return strMyImagePath;
     }
 }

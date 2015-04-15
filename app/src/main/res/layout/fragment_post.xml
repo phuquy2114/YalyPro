@@ -2,22 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="#FAEBD7">
 
 
     <ImageView
         android:id="@+id/img_avatar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:background="#cccccc"
         android:contentDescription="@string/app_name"
         android:padding="30dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:background="#cccccc" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_avatar"
         android:orientation="vertical">
@@ -71,7 +70,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/txt_sodo"
                 android:background="@android:color/transparent"
-                android:inputType="textCapSentences|textAutoCorrect" />
+                android:inputType="number" />
 
         </RelativeLayout>
 

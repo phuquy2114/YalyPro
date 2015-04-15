@@ -60,14 +60,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mImgThumnail = (ImageView) view.findViewById(R.id.img_avatar);
-        mImgThumnail.setBackgroundColor(0xff000000);
-//        file:///storage/sdcard0/DCIM/Camera/20150415_085833.jpg
-//        Picasso.with(getActivity())
-//                .load("file:///storage/sdcard0/DCIM/Camera/20150415_085833.jpg")
-//                .resize(300, 300)
-//                .error(R.mipmap.ic_launcher)
-//                .centerCrop()
-//                .into(mImgThumnail);
     }
 
     @Override
