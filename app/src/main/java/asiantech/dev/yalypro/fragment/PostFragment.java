@@ -55,6 +55,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     private Bitmap photoUser;
     private String mAvatarPath = "";
     private String type = "";
+    private String mAvatarbase ="";
 
 
     @Override
@@ -242,7 +243,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    // encode base 64
+    // encode base 64 su dung cho Volley
     private void executeEncode64(String urlPath) {
         if (mTaskEncode != null && mTaskEncode.getStatus() == AsyncTask.Status.RUNNING) {
             return;
