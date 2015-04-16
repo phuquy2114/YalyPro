@@ -74,7 +74,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
         super.onViewCreated(view, savedInstanceState);
         progressBar = new ProgressBar(getActivity());
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading ...");
+        progressDialog.setMessage("Pushing ...");
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
         progressDialog.setTitle("In Processing ...");
