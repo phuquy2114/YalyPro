@@ -30,7 +30,7 @@ public class ConnectingNetwork {
     public static final String POST = "POST";
     public static final String PUT = "PUT";
     public static final String GET = "GET";
-
+    public static int resultresponse = 200;
     private static ConnectingNetwork mInstance;
 
     private ConnectingNetwork() {
@@ -73,6 +73,7 @@ public class ConnectingNetwork {
 
             int response = conn.getResponseCode();
             Log.d(TAG, "The response is: " + response);
+            resultresponse = response;
             if (response < 400) {
                 is = conn.getInputStream();
                 result = readStream(is);

@@ -49,6 +49,7 @@ public class TopFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
+        new GetInfor().execute();
         setValue();
         setEvent();
     }
@@ -64,14 +65,12 @@ public class TopFragment extends BaseFragment {
 
     public void setValue() {
         mData = new ArrayList<>();
-        new GetInfor().execute();
         mAdapter = new AdapterTopFragment(getActivity(), mData);
-
+        mListView.setAdapter(mAdapter);
     }
 
 
     public void setEvent() {
-        mListView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -80,15 +79,17 @@ public class TopFragment extends BaseFragment {
                     @Override
                     public void run() {
                         new GetInfor().execute();
-                        // Toast.makeText(getActivity(), "Loading", Toast.LENGTH_SHORT).show();
+                        mAdapter.notifyDataSetChanged();
                         mAdapter = new AdapterTopFragment(getActivity(), mData);
                         mListView.setAdapter(mAdapter);
                         mSwipeRefreshLayout.setRefreshing(false);
 
                     }
-                }, 5000);
+                }, 3000);
             }
         });
+
+
     }
 
 
@@ -144,6 +145,8 @@ public class TopFragment extends BaseFragment {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     tdto = new DataTDTO(jsonObject);
                     mData.add(tdto);
+                    mAdapter.notifyDataSetChanged();
+                    mListView.setAdapter(mAdapter);
                 }
 
             } catch (JSONException e) {

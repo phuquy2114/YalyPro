@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -304,6 +305,12 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
             Log.d("qqq",""+jsonArray);
+            if (ConnectingNetwork.resultresponse==200){
+                Toast.makeText(getActivity(),"Post Success",Toast.LENGTH_SHORT).show();
+                mEdtName.setText("");
+                mEditNumber.setText("");
+                mImgThumnail.setImageResource(R.mipmap.ic_launcher);
+            }
         }
 
         public ArrayList<NameValuePair> getparams (){
