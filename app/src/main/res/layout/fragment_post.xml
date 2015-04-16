@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:background="#FAEBD7">
 
+    <ProgressBar
+        android:id="@+id/acr_progress_bar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content" />
+
 
     <ImageView
         android:id="@+id/img_avatar"
@@ -82,15 +89,15 @@
             android:background="#DEB887" />
 
         <RelativeLayout
+            android:id="@+id/view_muigiay"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp">
 
             <TextView
                 android:id="@+id/txt_muigiay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:text="@string/muigiay" />
 
 
@@ -98,8 +105,8 @@
                 android:id="@+id/group_radio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/txt_muigiay"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/txt_muigiay"
                 android:checkedButton="@+id/radio_square"
                 android:orientation="horizontal">
 

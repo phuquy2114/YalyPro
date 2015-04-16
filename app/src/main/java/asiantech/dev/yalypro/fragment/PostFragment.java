@@ -1,6 +1,7 @@
 package asiantech.dev.yalypro.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,8 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     private RadioGroup mRadioGroup;
     private View mView;
     private TextView mBtnPost;
+    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
 
     private EncodeBase64 mTaskEncode;
     private static final int CAMERA_REQUEST = 1888;
@@ -56,7 +60,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     private Bitmap photoUser;
     private String mAvatarPath = "";
     private String type = "";
-    private String mAvatarbase ="";
+    private String mAvatarbase = "";
 
 
     @Override
@@ -68,6 +72,12 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        progressBar = new ProgressBar(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading ...");
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle("In Processing ...");
         mImgThumnail = (ImageView) view.findViewById(R.id.img_avatar);
     }
 
@@ -98,7 +108,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnail);
-                  //  executeEncode64("file://" + mAvatarPath);
+                    //  executeEncode64("file://" + mAvatarPath);
                 } else {
                     Log.d("qqq", "uri is null");
                 }
@@ -114,7 +124,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                             .error(R.mipmap.ic_launcher)
                             .centerCrop()
                             .into(mImgThumnail);
-                 //   executeEncode64("file://" + mAvatarPath);
+                    //   executeEncode64("file://" + mAvatarPath);
                 }
 
             }
@@ -135,13 +145,13 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radio_square) {
-                    type ="square";
+                    type = "square";
                 } else if (checkedId == R.id.radio_round) {
-                    type ="round";
+                    type = "round";
                 } else if (checkedId == R.id.radio_pointed) {
-                    type ="pointed";
+                    type = "pointed";
                 } else if (checkedId == R.id.radio_tu) {
-                    type ="tu";
+                    type = "tu";
                 }
             }
         });
@@ -186,7 +196,9 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
                 dialogCameraRoll.show(getFragmentManager(), "");
                 break;
             case R.id.btn_post:
-                    new PostInfo().execute("http://ndlapi.somee.com/api/Measure/AddMeasure");
+                progressBar.setVisibility(View.VISIBLE);
+                progressDialog.show();
+                new PostInfo().execute("http://ndlapi.somee.com/api/Measure/AddMeasure");
                 break;
             default:
                 break;
@@ -282,7 +294,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
-    public class PostInfo extends AsyncTask<String , Void , JSONArray> {
+    public class PostInfo extends AsyncTask<String, Void, JSONArray> {
 
         @Override
         protected void onPreExecute() {
@@ -294,7 +306,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
             JSONArray jsonArray = null;
             try {
                 jsonArray = ConnectingNetwork.getInstance().executePostReturnJSONArray(params[0], getparams());
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
 
             }
@@ -304,24 +316,26 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
         @Override
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
-            Log.d("qqq",""+jsonArray);
-            if (ConnectingNetwork.resultresponse==200){
-                Toast.makeText(getActivity(),"Post Success",Toast.LENGTH_SHORT).show();
+            Log.d("qqq", "" + jsonArray);
+            if (ConnectingNetwork.resultresponse == 200) {
+                Toast.makeText(getActivity(), "Post Success", Toast.LENGTH_SHORT).show();
                 mEdtName.setText("");
                 mEditNumber.setText("");
                 mImgThumnail.setImageResource(R.mipmap.ic_launcher);
+                progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
             }
         }
 
-        public ArrayList<NameValuePair> getparams (){
+        public ArrayList<NameValuePair> getparams() {
             ArrayList<NameValuePair> params = new ArrayList<>();
 
             String mAvatar = getStringBase64FromBitmap("file://" + mAvatarPath);
-            params.add(new BasicNameValuePair("id","0"));
-            params.add(new BasicNameValuePair("measurer",mEdtName.getText().toString().trim()));
-            params.add(new BasicNameValuePair("size",mEditNumber.getText().toString().toString()));
-            params.add(new BasicNameValuePair("shoe_type",type));
-            params.add(new BasicNameValuePair("img",mAvatar));
+            params.add(new BasicNameValuePair("id", "0"));
+            params.add(new BasicNameValuePair("measurer", mEdtName.getText().toString().trim()));
+            params.add(new BasicNameValuePair("size", mEditNumber.getText().toString().toString()));
+            params.add(new BasicNameValuePair("shoe_type", type));
+            params.add(new BasicNameValuePair("img", mAvatar));
 
             return params;
         }
