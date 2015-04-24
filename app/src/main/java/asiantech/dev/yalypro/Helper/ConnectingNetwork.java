@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nguyen Tuong Tri on March 18th 2015.
+ *
+ * Created by PhuQuy on March 18th 2015.
  */
 public class ConnectingNetwork {
     public static final String TAG = ConnectingNetwork.class.getSimpleName();
@@ -44,11 +45,25 @@ public class ConnectingNetwork {
         return mInstance;
     }
 
+    /**
+     *
+     * @param conn
+     */
+
     private void addHeader(HttpURLConnection conn) {
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("Content-Language", "en-US");
         conn.setRequestProperty("Accept-Charset", "UTF-8");
     }
+
+    /**
+     *
+     * @param urlString
+     * @param params
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
 
     public String executePostReturnString(String urlString, ArrayList<NameValuePair> params) throws IOException, JSONException {
         String result = null;
@@ -96,17 +111,45 @@ public class ConnectingNetwork {
         return result;
     }
 
-    public JSONObject executePost(String urlString, ArrayList<NameValuePair> params) throws IOException, JSONException {
+    /**
+     *
+     * @param urlString
+     * @param params
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+
+    public JSONObject executePostReturnJSONObject(String urlString, ArrayList<NameValuePair> params) throws IOException, JSONException {
         String result = executePostReturnString(urlString, params);
         return result == null ? null : new JSONObject(result);
     }
+
+    /**
+     *
+     * @param urlString
+     * @param params
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
 
     public JSONArray executePostReturnJSONArray(String urlString, ArrayList<NameValuePair> params) throws IOException, JSONException {
         String result = executePostReturnString(urlString, params);
         return result == null ? null : new JSONArray(result);
     }
 
-    public JSONObject executeGet(String Method, String urlString) throws IOException, JSONException {
+    /**
+     *
+     * @param Method
+     * @param urlString
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+
+    public String excuteGetResultString(String Method, String urlString) throws IOException, JSONException {
+
         String result = null;
         InputStream is = null;
         HttpURLConnection conn = null;
@@ -142,11 +185,33 @@ public class ConnectingNetwork {
                 conn.disconnect();
             }
         }
+        return result;
+    }
 
+    /**
+     *
+     * @param Method
+     * @param urlString
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+
+    public JSONObject executeGetResultJSONObject(String Method, String urlString) throws IOException, JSONException {
+        String result = excuteGetResultString(Method,urlString );
         return result == null ? null : new JSONObject(result);
     }
 
-    public JSONArray executeGetResultJSONArray (String Method, String urlString) throws IOException, JSONException {
+    /**
+     * TAG GET JSONArray
+     * @param Method
+     * @param urlString
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+
+    public JSONArray executeGetResultJSONArray(String Method, String urlString) throws IOException, JSONException {
         String result = null;
         InputStream is = null;
         HttpURLConnection conn = null;
@@ -185,6 +250,16 @@ public class ConnectingNetwork {
 
         return result == null ? null : new JSONArray(result);
     }
+
+    /**
+     * TAG UPDATE
+     * @param method
+     * @param urlString
+     * @param params
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
 
     public JSONObject execute(String method, String urlString, ArrayList<NameValuePair> params) throws IOException, JSONException {
         String result = null;
@@ -231,12 +306,26 @@ public class ConnectingNetwork {
         return result == null ? null : new JSONObject(result);
     }
 
+    /**
+     *
+     * @param out
+     * @param params
+     * @throws IOException
+     */
+
     private void writeStream(OutputStream out, ArrayList<NameValuePair> params) throws IOException {
         DataOutputStream writer = new DataOutputStream(out);
         writer.writeBytes(getQuery(params));
         writer.flush();
         writer.close();
     }
+
+    /**
+     *
+     * @param is
+     * @return
+     * @throws IOException
+     */
 
     private String readStream(InputStream is) throws IOException {
         BufferedReader r = new BufferedReader(new InputStreamReader(is));
@@ -250,12 +339,18 @@ public class ConnectingNetwork {
         return total.toString();
     }
 
+    /**
+     *
+     * @param params
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
-        for (NameValuePair pair : params)
-        {
+        for (NameValuePair pair : params) {
             if (first)
                 first = false;
             else
