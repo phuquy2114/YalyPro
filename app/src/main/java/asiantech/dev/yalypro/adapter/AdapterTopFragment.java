@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,7 @@ public class AdapterTopFragment extends BaseAdapter {
         private ImageView mImgRound;
         private ImageView mImgSquare;
         private ImageView mImgTu;
+        private Button mBtnSetting;
     }
 
     @Override
@@ -72,6 +74,9 @@ public class AdapterTopFragment extends BaseAdapter {
             viewHolder.mImgPointed = (ImageView) convertView.findViewById(R.id.btn_img_nhon);
             viewHolder.mImgRound = (ImageView) convertView.findViewById(R.id.btn_img_tron);
             viewHolder.mImgTu = (ImageView) convertView.findViewById(R.id.btn_img_tu);
+
+            //Button
+            viewHolder.mBtnSetting = (Button) convertView.findViewById(R.id.btn_setting);
 
             convertView.setTag(viewHolder);
         } else {
@@ -102,7 +107,6 @@ public class AdapterTopFragment extends BaseAdapter {
         } else {
             setDefaultImageCheckbox(viewHolder, position);
         }
-
 
         return convertView;
     }

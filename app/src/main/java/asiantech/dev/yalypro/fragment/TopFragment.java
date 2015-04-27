@@ -1,5 +1,6 @@
 package asiantech.dev.yalypro.fragment;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +36,7 @@ public class TopFragment extends BaseFragment {
     private AdapterTopFragment mAdapter;
     private View mViewRoot;
     private ArrayList<DataTDTO> mData;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -60,6 +63,10 @@ public class TopFragment extends BaseFragment {
                 getResources().getColor(R.color.red), getResources().getColor(R.color.chartreu)
                 , getResources().getColor(R.color.blue));
         mListView = (ListView) mViewRoot.findViewById(R.id.lv_information);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please Loading Data");
+        progressDialog.setMessage("Loading ...");
+        progressDialog.show();
 
     }
 
@@ -140,17 +147,24 @@ public class TopFragment extends BaseFragment {
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
             DataTDTO tdto;
-            try {
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    tdto = new DataTDTO(jsonObject);
-                    mData.add(tdto);
-                    mAdapter.notifyDataSetChanged();
-                    mListView.setAdapter(mAdapter);
+            if (jsonArray != null) {
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        tdto = new DataTDTO(jsonObject);
+                        mData.add(tdto);
+                        mAdapter.notifyDataSetChanged();
+                        mListView.setAdapter(mAdapter);
+                        progressDialog.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } else {
+                Toast.makeText(getActivity(),"No Data Server",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }
     }
