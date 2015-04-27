@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * JsonUtil is a class contain some common method to support get data from
  * JSONObject
  *
- * @author thangtc
+ * @author PhuQuy
  * @version 1.0
  * @since 05/09/2014
  */
@@ -292,10 +292,5 @@ public class JsonUtil {
             return null;
         }
     }
-
-
-
-
-
 
 }

@@ -339,7 +339,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener, 
 
             return params;
         }
-
-
     }
+
 }
