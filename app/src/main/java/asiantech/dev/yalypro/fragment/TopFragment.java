@@ -105,6 +105,7 @@ public class TopFragment extends BaseFragment {
         super.onStart();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();

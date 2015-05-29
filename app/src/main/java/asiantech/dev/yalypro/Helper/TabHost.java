@@ -80,10 +80,13 @@ public class TabHost extends RelativeLayout implements View.OnClickListener {
     public void setDefault() {
         //Tab one
         mTxtTabOne.setTextColor(0xff6fca7b);
+        mViewTabOne.setBackgroundColor(0xFFA9A9A9);
         //Tab Two
         mTxtTabTwo.setTextColor(0xff6fca7b);
+        mViewTabTwo.setBackgroundColor(0xFFA9A9A9);
         //Tab Three
         mTxtTabThree.setTextColor(0xff6fca7b);
+        mViewTabThree.setBackgroundColor(0xFFA9A9A9);
 
     }
 
@@ -91,10 +94,13 @@ public class TabHost extends RelativeLayout implements View.OnClickListener {
         setDefault();
         if (position == 0) {
             mTxtTabOne.setTextColor(0xFF333300);
+            mViewTabOne.setBackgroundColor(0xFFF0FFFF);
         } else if (position == 1) {
             mTxtTabTwo.setTextColor(0xFF333300);
+            mViewTabTwo.setBackgroundColor(0xFFF0FFFF);
         } else if (position == 2) {
             mTxtTabThree.setTextColor(0xFF333300);
+            mViewTabThree.setBackgroundColor(0xFFF0FFFF);
         }
 
     }
