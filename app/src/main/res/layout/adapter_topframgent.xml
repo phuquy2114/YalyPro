@@ -33,6 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:text="@string/nguoido"
+            android:typeface="serif"
             android:textStyle="bold" />
 
         <TextView

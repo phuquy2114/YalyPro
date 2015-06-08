@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 import asiantech.dev.yalypro.Helper.JsonUtil;
 
 /**
@@ -40,7 +42,13 @@ public class DataTDTO implements Parcelable {
 
 
     public String getName() {
-        return name;
+        String ecode = null;
+        try {
+            ecode = name.getBytes("ISO-8859-1").toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return ecode;
     }
 
     public void setName(String name) {

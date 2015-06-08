@@ -91,5 +91,6 @@
     <orderEntry type="library" exported="" name="android-volley-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
+    <orderEntry type="module" module-name="libraryindicator" exported="" />
   </component>
 </module>
